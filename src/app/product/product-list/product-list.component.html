@@ -1,0 +1,68 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-toolbar>
+            <mat-toolbar-row>
+                <span>Product List</span>
+                <span class="example-spacer"></span>
+                <button mat-raised-button matTooltip="Add New Product"
+                    (click)="openAddEditProduct()"><mat-icon>add</mat-icon></button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear
+            matSortDisableClear>
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Product ID</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.id }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="sku">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>SKU</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.sku }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="purchasePrice">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Purchase Price</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.purchasePrice }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="salePrice">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Sale Price</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.salePrice }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="stockQuantity">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Stock Quantity</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.stockQuantity }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="taxRate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Tax Rate</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.taxRate }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="barcode">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.barcode }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="categoryId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.categoryId }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                <mat-cell *matCellDef="let product">
+                    <button mat-icon-button (click)="openAddEditProduct()"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="deleteProduct(product.id)"><mat-icon>delete</mat-icon></button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
