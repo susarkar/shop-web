@@ -9,6 +9,17 @@ import { MatCardModule } from '@angular/material/card';
 import { Product } from '../product.model';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { ProductAddEditComponent } from '../product-add-edit/product-add-edit.component';
+
 @Component({
   selector: 'app-product-list',
   imports: [MatCardModule, MatToolbarModule, MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatButtonModule, MatTooltipModule],
@@ -18,9 +29,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class ProductListComponent implements AfterViewInit {
   productService = inject(ProductService);
   products = this.productService.Products;
+
   displayedColumns: string[] = ['id', 'name', 'sku', 'purchasePrice', 'salePrice', 'stockQuantity', 'taxRate', 'barcode', 'categoryId', 'actions'];
   dataSource = new MatTableDataSource<Product>(this.products());
   totalItems: number = 0;
+  readonly dialog = inject(MatDialog);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor() {
     this.productService.getProducts();
@@ -36,8 +49,21 @@ export class ProductListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  openAddEditProduct() {
-    throw new Error('Method not implemented.');
+  openAddEditProduct(): void {
+    const dialogRef = this.dialog.open(ProductAddEditComponent, {
+      width: '800px',
+      height: '500px',
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        //this.animal.set(result);
+        console.log('This data is coming from Dialog:');
+      }
+    });
+
   }
   addEditProduct(id: any) {
     throw new Error('Method not implemented.');

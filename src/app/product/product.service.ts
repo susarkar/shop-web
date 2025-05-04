@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.development';
+import { environment } from './../../environments/environment';
 import { inject, Injectable, signal } from '@angular/core';
 import { Product } from './product.model';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductService {
+  Categories: any;
   constructor() { }
 
   API_URL = environment.apiUrl;
