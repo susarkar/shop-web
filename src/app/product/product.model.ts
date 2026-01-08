@@ -1,11 +1,14 @@
 export interface Product {
-    id: number;
-    name: string;
+    id: string;
+    productName: string;
     sku: string;
+    hsnCode: string;
+    unit: string;
+    mrp: number;
     purchasePrice: number;
-    salePrice: number;
-    stockQuantity: number;
-    taxRate: number;
-    barcode: string;
-    categoryId: number;
+    sellingPrice: number;
+    openingStock: number;
+    cgst: number;
+    sgst: number;
+    igst: number;
 }

@@ -1,0 +1,59 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+        <mat-toolbar>
+            <mat-toolbar-row>
+                <span>Supplier List</span>
+                <span class="example-spacer"></span>
+                <button mat-raised-button matTooltip="Add New Supplier"
+                    (click)="openAddSupplier()"><mat-icon>add</mat-icon></button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Supplier Name</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="address">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Addess</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.address }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.phone }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.email }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="conatctPerson">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Contact Person</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.contactPerson }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="gstin">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>GSTIN</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{ row.gstin }}</mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-icon-button (click)="openEditSupplier(row)"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="deleteSupplier(row.id)"><mat-icon>delete</mat-icon></button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons [pageSize]="pageSize"
+            [length]="totalRecords" (page)="onPageChange($event)">
+        </mat-paginator>
+    </mat-card-content>

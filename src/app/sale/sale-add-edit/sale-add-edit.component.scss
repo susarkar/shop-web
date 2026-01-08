@@ -1,0 +1,15 @@
+.row {
+    display: flex;
+    gap: 1px;
+
+    mat-form-field:not(.small-field) {
+        padding: 0 0px;
+        width: 100%;
+    }
+
+}
+
+.small-field {
+    flex: 0 0 90px;
+    padding: 0 0px;
+}

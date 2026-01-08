@@ -13,13 +13,13 @@
         <mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear
             matSortDisableClear>
 
-            <ng-container matColumnDef="id">
+            <!-- <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Product ID</mat-header-cell>
                 <mat-cell *matCellDef="let product">{{ product.id }}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="name">
+            </ng-container> -->
+            <ng-container matColumnDef="productName">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</mat-header-cell>
-                <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
+                <mat-cell *matCellDef="let product">{{ product.productName }}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="sku">
@@ -27,36 +27,39 @@
                 <mat-cell *matCellDef="let product">{{ product.sku }}</mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="hsnCode">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>HSN Code</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.hsnCode }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="unit">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Unit</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.unit }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="mrp">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>MRP</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.mrp }}</mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="purchasePrice">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Purchase Price</mat-header-cell>
                 <mat-cell *matCellDef="let product">{{ product.purchasePrice }}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="salePrice">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Sale Price</mat-header-cell>
-                <mat-cell *matCellDef="let product">{{ product.salePrice }}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="stockQuantity">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Stock Quantity</mat-header-cell>
-                <mat-cell *matCellDef="let product">{{ product.stockQuantity }}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="taxRate">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Tax Rate</mat-header-cell>
-                <mat-cell *matCellDef="let product">{{ product.taxRate }}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="barcode">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</mat-header-cell>
-                <mat-cell *matCellDef="let product">{{ product.barcode }}</mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="categoryId">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
-                <mat-cell *matCellDef="let product">{{ product.categoryId }}</mat-cell>
+            <ng-container matColumnDef="sellingPrice">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Selling Price</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.sellingPrice }}</mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="openingStock">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Opening Stock</mat-header-cell>
+                <mat-cell *matCellDef="let product">{{ product.openingStock }}</mat-cell>
+            </ng-container>
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                 <mat-cell *matCellDef="let product">
-                    <button mat-icon-button (click)="openAddEditProduct()"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="openAddEditProduct(product)"><mat-icon>edit</mat-icon></button>
                     <button mat-icon-button (click)="deleteProduct(product.id)"><mat-icon>delete</mat-icon></button>
                 </mat-cell>
             </ng-container>

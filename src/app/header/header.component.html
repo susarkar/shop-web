@@ -3,8 +3,53 @@
     <span routerLink="">IntelliSense Service </span>
     <span class="example-spacer"></span>
     <button mat-button routerLink="">Home</button>
-    <button mat-button routerLink="student-list">Student</button>
-    <button mat-button routerLink="product-list">Products</button>
-    <button mat-button routerLink="contact-list">Contacts</button>
-    <button mat-button routerLink="about-us">About Us</button>
+    <button mat-button [matMenuTriggerFor]="inventory">Inventory</button>
+    <mat-menu #inventory="matMenu">
+        <button mat-menu-item routerLink="product-list">Product</button>
+        <button mat-menu-item routerLink="category-list">Product Category</button>
+        <button mat-menu-item routerLink="brand-list">Inventory Audit</button>
+        <button mat-menu-item routerLink="stock-adjustment">Stock Adjustment</button>
+        <button mat-menu-item routerLink="inventory-report">View Inventory Report</button>
+
+
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="purchase_supplier">Purchase</button>
+    <mat-menu #purchase_supplier="matMenu">
+        <button mat-menu-item routerLink="purchase-list">Purchase Orders</button>
+        <button mat-menu-item routerLink="supplier-list">Manage Supplier</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="sale">Sale-Invoice</button>
+    <mat-menu #sale="matMenu">
+        <button mat-menu-item routerLink="sale-list">Sale-invoices</button>
+        <button mat-menu-item routerLink="process-sale-return">Process Returns</button>
+        <button mat-menu-item routerLink="customer-list">Manage Customer</button>
+        <button mat-menu-item routerLink="customer-purchase-histroy">Customer Purchases</button>
+
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="expense_management">Expense</button>
+    <mat-menu #expense_management="matMenu">
+        <button mat-menu-item routerLink="non_inventoru_expense">Non-Inventory Expenses</button>
+        <button mat-menu-item routerLink="expense_category">Expense category</button>
+        <button mat-menu-item routerLink="expense_report">Expense Report</button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="gst_compliance_filing">GST</button>
+    <mat-menu #gst_compliance_filing="matMenu">
+        <button mat-menu-item routerLink="gstr_report">Generate GSTR Reports</button>
+        <button mat-menu-item routerLink="gst_return_file">GST Return Filing</button>
+
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="report">Reports</button>
+    <mat-menu #report="matMenu">
+        <button mat-menu-item routerLink="sales_report">Sales Report</button>
+        <button mat-menu-item routerLink="inventory_report">Inventory Report</button>
+        <button mat-menu-item routerLink="profit_loss_report">Profit and Loss Report</button>
+        <button mat-menu-item routerLink="customer_report">Customer Report</button>
+    </mat-menu>
+    <!-- <button mat-button routerLink="about-us">About Us</button> -->
+    <!-- <button mat-button routerLink="purchase">Purchase</button>
+    <button mat-button routerLink="supplier">Supplier</button> -->
 </mat-toolbar>

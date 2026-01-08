@@ -2,7 +2,7 @@ import { ProductService } from './../product.service';
 import { AfterViewInit, Component, effect, inject, OnInit, resource, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,7 +18,9 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductAddEditComponent } from '../product-add-edit/product-add-edit.component';
+
 
 @Component({
   selector: 'app-product-list',
@@ -26,56 +28,55 @@ import { ProductAddEditComponent } from '../product-add-edit/product-add-edit.co
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
-export class ProductListComponent implements AfterViewInit {
-  productService = inject(ProductService);
-  products = this.productService.Products;
+export class ProductListComponent {
 
-  displayedColumns: string[] = ['id', 'name', 'sku', 'purchasePrice', 'salePrice', 'stockQuantity', 'taxRate', 'barcode', 'categoryId', 'actions'];
-  dataSource = new MatTableDataSource<Product>(this.products());
-  totalItems: number = 0;
-  readonly dialog = inject(MatDialog);
+  productService = inject(ProductService);
+
+  products: Product[] = this.productService.products();
+
+  displayedColumns: string[] = ['productName', 'sku', 'hsnCode', 'unit', 'mrp', 'purchasePrice', 'sellingPrice', 'openingStock', 'actions'];
+  dataSource = new MatTableDataSource<Product>(this.products);
+  totalRecords: number = 0;
+  pageSize: number = 10;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  readonly dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+
   constructor() {
+
     this.productService.getProducts();
     effect(() => {
-      const products = this.products();
+      const products = this.productService.products();
       this.dataSource.data = products;
-      this.totalItems = products.length;
-      console.log('Products:', products);
-    })
-  }
 
-  ngAfterViewInit(): void {
+      this.totalRecords = products.length;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
     this.dataSource.paginator = this.paginator;
   }
 
-  openAddEditProduct(): void {
+  openAddEditProduct(data?: Product): void {
     const dialogRef = this.dialog.open(ProductAddEditComponent, {
       width: '800px',
       height: '500px',
-
+      data: data || null
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        //this.animal.set(result);
-        console.log('This data is coming from Dialog:');
+      if (result) {
+        const message = data ? 'Product updated successfully' : 'Product added successfully';
+        this.snackBar.open(message, undefined, { duration: 3000 });
+        this.productService.getProducts();
       }
     });
-
-  }
-  addEditProduct(id: any) {
-    throw new Error('Method not implemented.');
   }
 
-  deleteProduct(_t33: any) {
-    throw new Error('Method not implemented.');
+  deleteProduct(id: any) {
+    if (confirm('Are you sure you want to delete this product?')) {
+      this.productService.deleteProduct(id);
+      this.snackBar.open('Product deleted successfully', undefined, { duration: 3000 });
+    }
   }
-  editProduct(_t33: any) {
-    throw new Error('Method not implemented.');
-  }
-
-
-
 }

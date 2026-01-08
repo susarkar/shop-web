@@ -10,8 +10,37 @@ export class CategoryService {
   http = inject(HttpClient);
   API_URL = environment.apiUrl;
   END_POINT = "categories";
+
+  // categorySignal = signal<Category[]>([]);
+
+  // get categories() {
+  //   return this.categorySignal;
+  // }
+
+  // getCategories() {
+  //   return this.http.get<Category[]>(`${this.API_URL}/${this.END_POINT}`);
+  // }
+  // getCategory(categoryId: any) {
+  //   return this.http.get<Category>(`${this.API_URL}/${this.END_POINT}/${categoryId}`);
+  // }
+  // addCategory(data: any) {
+  //   return this.http.post(`${this.API_URL}/${this.END_POINT}`, data);
+  // }
+  // editCategory(data: any) {
+  //   return this.http.put(`${this.API_URL}/${this.END_POINT}`, data);
+  // }
+  // deleteCategory(categoryId: any) {
+  //   return this.http.delete(`${this.API_URL}/${this.END_POINT}/${categoryId}`);
+  // }
+  // searchCategory(searchCriteria: any) {
+  //   return this.http.get<Category[]>(`${this.API_URL}/${this.END_POINT}/${searchCriteria}`);
+  // }
+
+
+
+
   categorySignal = signal<Category[]>([]);
-  get Categories() {
+  get categories() {
     return this.categorySignal;
   }
 

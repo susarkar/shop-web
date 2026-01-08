@@ -1,0 +1,47 @@
+<mat-card class="mat-elevation-z8">
+  <mat-card-header>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span>Sales</span>
+        <span class="example-spacer"></span>
+        <button mat-raised-button matTooltip="Add New Sale" (click)="openAddEditSale()"><mat-icon>add</mat-icon></button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="invoiceNo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Invoice No</mat-header-cell>
+        <mat-cell *matCellDef="let s">{{ s.invoiceNo }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="invoiceDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+        <mat-cell *matCellDef="let s">{{ s.invoiceDate | date:'dd-MM-yyyy' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="customerName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
+        <mat-cell *matCellDef="let s">{{ s.customerName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="totalInvoiceValue">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+        <mat-cell *matCellDef="let s">{{ s.totalInvoiceValue | number:'1.2-2' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let s">
+          <button mat-icon-button (click)="openAddEditSale(s)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button (click)="deleteSale(s.id)"><mat-icon>delete</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

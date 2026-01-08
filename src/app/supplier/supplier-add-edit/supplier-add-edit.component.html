@@ -1,0 +1,56 @@
+<form [formGroup]="supplierForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Add/Edit Supplier</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" required>
+                    @if(supplierForm.get('name')?.hasError('required')) {<mat-error>Name is Manadatory</mat-error>}
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" required>
+                    @if(supplierForm.get('email')?.hasError('required')) {
+                    <mat-error>Email is Manadatory</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone" required>
+                    @if(supplierForm.get('purchasePrice')?.hasError('required')) {
+                    <mat-error>Phone number is Manadatory</mat-error>
+                    }
+                    @if(supplierForm.get('purchasePrice')?.hasError('min')) {
+                    <mat-error>Purchase Price should be greater than 0</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address" required>
+                    @if(supplierForm.get('address')?.hasError('required')) {
+                    <mat-error>Address is Manadatory</mat-error>
+                    }
+                    @if(supplierForm.get('address')?.hasError('min')) {
+                    <mat-error>Address is Mandatory</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+
+        </mat-card-content>
+        <mat-card-actions>
+            <div mat-dialog-actions align="end" class="action">
+                <button mat-raised-button color="accent" type="button" mat-dialog-close>Cancel</button>
+                <button mat-raised-button cdkFocusInitial color="primary" type="submit"
+                    [mat-dialog-close]="true">Save</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</form>
